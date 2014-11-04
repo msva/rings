@@ -4,11 +4,14 @@ if [ -f config.orig ]; then
   mv config.orig config
 fi
 
-echo "Trying to where you installed Lua..."
+echo "Trying to guess, where you installed Lua..."
 
 arg="${1}"
 
 if which lua; then
+  lua_bin=`which lua`
+  lua_bin_dir=`dirname $lua_bin`
+elif which luajit; then
   lua_bin=`which lua`
   lua_bin_dir=`dirname $lua_bin`
 elif which ${arg}; then
